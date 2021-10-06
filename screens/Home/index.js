@@ -4,7 +4,7 @@ import {View, Button, StyleSheet, StatusBar, Text} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 
 const HomeNewScreen = ({navigation}) => {
-  const {colors} = useTheme();
+  const {colors} = useTheme(); //colors ini untuk memunculkan darkmode
 
   const theme = useTheme();
 
@@ -17,7 +17,7 @@ const HomeNewScreen = ({navigation}) => {
       {/* ------- CONTENT HOME DARI SINI ----------*/}
       <View>
         <View style={{paddingHorizontal: 20, paddingBottom: 10}}>
-          <Text>halo</Text>
+          <Text style={{color: colors.text}}>halo</Text>
         </View>
       </View>
       {/* <Button
