@@ -37,7 +37,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Drawer = createDrawerNavigator();
 
 const App = () => {
-  // const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(true);
   // const [userToken, setUserToken] = React.useState(null);
 
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
@@ -128,7 +128,7 @@ const App = () => {
       },
       signOut: async () => {
         // setUserToken(null);
-        // setIsLoading(false);
+        setIsLoading(false);
         try {
           await AsyncStorage.removeItem('userToken');
         } catch (e) {
@@ -176,7 +176,11 @@ const App = () => {
           {loginState.userToken !== null ? (
             <Drawer.Navigator
               drawerContent={props => <DrawerContent {...props} />}>
-              <Drawer.Screen name="HomeDrawer" component={MainTabScreen} />
+              <Drawer.Screen
+                name="HomeDrawer"
+                component={MainTabScreen}
+                theme={theme}
+              />
               <Drawer.Screen name="SupportScreen" component={SupportScreen} />
               <Drawer.Screen name="SettingsScreen" component={SettingsScreen} />
               <Drawer.Screen name="BookmarkScreen" component={BookmarkScreen} />

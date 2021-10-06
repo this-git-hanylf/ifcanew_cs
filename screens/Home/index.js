@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, Text, Button, StyleSheet, StatusBar} from 'react-native';
+// import {Text} from '@components';
+import {View, Button, StyleSheet, StatusBar, Text} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 
 const HomeNewScreen = ({navigation}) => {
@@ -8,13 +9,17 @@ const HomeNewScreen = ({navigation}) => {
   const theme = useTheme();
 
   return (
-    <View style={styles.container}>
+    <View>
       {/* STATUS BAR JANGAN DIUBAH, KARENA TEMPLATE NYA BISA CHANGE DARKMODE */}
       <StatusBar barStyle={theme.dark ? 'light-content' : 'dark-content'} />
       {/* STATUS BAR JANGAN DIUBAH, KARENA TEMPLATE NYA BISA CHANGE DARKMODE */}
 
       {/* ------- CONTENT HOME DARI SINI ----------*/}
-      <Text style={{color: colors.text}}>home yang baru</Text>
+      <View>
+        <View style={{paddingHorizontal: 20, paddingBottom: 10}}>
+          <Text>halo</Text>
+        </View>
+      </View>
       {/* <Button
         title="Go to details screen"
         onPress={() => navigation.navigate('Details')}

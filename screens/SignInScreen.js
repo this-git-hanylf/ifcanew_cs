@@ -24,7 +24,8 @@ import Users from '../model/users';
 import {useDispatch} from 'react-redux';
 import UserController from '../src/controller/UserController';
 import DeviceInfo from 'react-native-device-info';
-
+import {productService} from '../src/controller/ProductService';
+import {sessions} from '../src/helpers';
 const SignInScreen = ({navigation}) => {
   const [data, setData] = React.useState({
     username: '',
@@ -140,9 +141,10 @@ const SignInScreen = ({navigation}) => {
     await UserController.login(formData).then(res => {
       if (res.Error === false || !res.Error) {
         if (res.Data.isResetPass === false || !res.Data.isResetPass == 1) {
-          //   this.getTower(;
-          //   alert('abis ini get tower');
-          signIn(res);
+          getTower(res);
+          // console.log('abis ini get tower', res);
+          // alert('abis ini get tower', res.Data);
+          // signIn(res);
         } else {
           navigation.navigate(this.props.componentId, 'SignUpScreen', {
             email: res.Data.user,
@@ -150,6 +152,47 @@ const SignInScreen = ({navigation}) => {
         }
       }
     });
+  };
+  const getTower = async rest => {
+    let result = rest.Data;
+    // console.log('result for gettower', result);
+    const data = {
+      email: result.user,
+      app: 'O',
+    };
+    // console.log('data for gettower', data);
+
+    await productService.getTower(data).then(res => {
+      if (res.Error === false) {
+        let resData = res.Data;
+        result['UserProject'] = resData;
+        storagesignIn(result);
+        console.log('resDataTower', resData);
+      }
+    });
+  };
+
+  const storagesignIn = async res => {
+    console.log('res storage login', res);
+    // const {emailTextInput, passwordTextInput} = this.state;
+    try {
+      sessions.setSess('@UserId', res.UserId);
+      sessions.setSess('@Name', res.name);
+      sessions.setSess('@Token', res.Token);
+      sessions.setSess('@User', res.user);
+      sessions.setSess('@Group', res.Group);
+      sessions.setSess('@isLogin', true);
+      sessions.setSess('@isReset', res.isResetPass);
+      sessions.setSess('@AgentCd', res.AgentCd);
+      sessions.setSess('@Debtor', res.Debtor_acct);
+      sessions.setSess('@rowID', res.rowID);
+      sessions.setSess('@RefreshProfile', false);
+      sessions.setSess('@UserProject', res.UserProject);
+
+      signIn(res);
+    } catch (err) {
+      console.log('error:', err);
+    }
   };
 
   return (
@@ -270,7 +313,7 @@ const SignInScreen = ({navigation}) => {
                     color: '#fff',
                   },
                 ]}>
-                Sign Innn
+                Sign In
               </Text>
             </LinearGradient>
           </TouchableOpacity>
