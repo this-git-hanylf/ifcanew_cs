@@ -65,7 +65,7 @@ const App = () => {
     colors: {
       ...NavigationDarkTheme.colors,
       ...PaperDarkTheme.colors,
-      background: '#333333',
+      background: '#000',
       text: '#ffffff',
     },
   };
