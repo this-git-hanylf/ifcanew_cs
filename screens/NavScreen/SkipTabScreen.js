@@ -7,8 +7,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 // import HomeScreen from './HomeScreen';
 
-import ProfileScreen from '../ProfileScreen';
+import ProfileSkipScreen from '../SkipScreen/ProfileSkip';
 import SkipScreen from '../SkipScreen';
+import SignInScreen from '../SignInScreen';
 
 const HomeStack = createStackNavigator();
 
@@ -34,7 +35,7 @@ const SkipTabScreen = ({navigation}) => (
 
     <Tab.Screen
       name="Profile"
-      component={ProfileScreen}
+      component={ProfileSkipScreen}
       options={{
         tabBarLabel: 'Profile',
         tabBarColor: '#694fad',
@@ -61,5 +62,6 @@ const HomeStackScreen = ({navigation}) => (
       },
     }}>
     <HomeStack.Screen name="Skip" component={SkipScreen} />
+    <HomeStack.Screen name="SignIn" component={SignInScreen} />
   </HomeStack.Navigator>
 );

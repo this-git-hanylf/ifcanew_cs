@@ -21,57 +21,40 @@ const OnBoardingScreen = ({navigation}) => {
   const slider = [
     {
       key: 1,
-      title: 'Title 1',
-      text: 'Description.\nSay something cool',
+      // title: 'Title 1',
+      // text: 'Description.\nSay something cool',
       image: require('../../src/assets/image/background/Pakubuwono.png'),
-      backgroundColor: '#59b2ab',
+      // backgroundColor: '#59b2ab',
     },
     {
       key: 2,
       title: 'Title 2',
       text: 'Other cool stuff',
-      image: require('../../assets/logo.png'),
+      image: require('../../src/assets/icons/onboard/apartment.png'),
       backgroundColor: '#febe29',
     },
     {
       key: 3,
       title: 'Rocket guy',
       text: "I'm already out of descriptions\n\nLorem ipsum bla bla bla",
-      image: require('../../assets/logo.png'),
+      image: require('../../src/assets/icons/onboard/treasure-map.png'),
       backgroundColor: '#22bcb5',
     },
   ];
 
   const _renderItem = ({item}) => {
     return (
-      <View style={{flex: 1}}>
-        <ImageBackground
-          source={require('../../src/assets/image/background/bg.jpeg')}
-          resizeMode="cover"
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <Text style={stylesSlide.title}>{item.title}</Text>
+        <Image
+          source={item.image}
           style={{
-            flex: 1,
-            justifyContent: 'center',
-            width: '100%',
-            // paddingBottom: 10,
-          }}>
-          <Image
-            source={item.image}
-            style={{
-              width: 300,
-              resizeMode: 'contain',
-              alignSelf: 'center',
-            }}
-          />
-          <Text style={stylesSlide.title}>{item.title}</Text>
-
-          <Text style={stylesSlide.text}>{item.text}</Text>
-          {/* <View style={[stylesSlide.slide, {}]}>
-          <Image source={item.image} style={{width: '100%'}} />
-          <Text style={stylesSlide.title}>{item.title}</Text>
-
-          <Text style={stylesSlide.text}>{item.text}</Text>
-        </View> */}
-        </ImageBackground>
+            width: 300,
+            resizeMode: 'center',
+            alignSelf: 'center',
+          }}
+        />
+        <Text style={stylesSlide.text}>{item.text}</Text>
       </View>
     );
   };
@@ -87,14 +70,23 @@ const OnBoardingScreen = ({navigation}) => {
         backgroundColor="transparent"
         barStyle="dark-content"
       />
-
-      <AppIntroSlider
-        renderItem={_renderItem}
-        data={slider}
-        showSkipButton={true}
-        onDone={_onDone}
-        dotClickEnabled={true}
-      />
+      <ImageBackground
+        source={require('../../src/assets/image/background/bg.jpeg')}
+        resizeMode="cover"
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          width: '100%',
+          // paddingBottom: 10,
+        }}>
+        <AppIntroSlider
+          renderItem={_renderItem}
+          data={slider}
+          showSkipButton={true}
+          onDone={_onDone}
+          dotClickEnabled={true}
+        />
+      </ImageBackground>
     </View>
   );
 };
@@ -177,13 +169,14 @@ const stylesSlide = StyleSheet.create({
     alignSelf: 'center',
   },
   text: {
-    color: 'rgba(255, 255, 255, 0.8)',
+    // color: 'rgba(255, 255, 255, 0.8)',
+    color: '#333',
     textAlign: 'center',
   },
   title: {
     fontSize: 22,
-    color: 'white',
+    color: '#333',
     textAlign: 'center',
-    top: 10,
+    // top: 10,
   },
 });

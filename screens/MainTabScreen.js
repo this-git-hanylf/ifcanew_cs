@@ -34,7 +34,7 @@ const MainTabScreen = ({navigation}) => (
         ),
       }}
     />
-    <Tab.Screen
+    {/* <Tab.Screen
       name="Notifications"
       component={DetailsStackScreen}
       options={{
@@ -45,7 +45,7 @@ const MainTabScreen = ({navigation}) => (
           <Icon name="ios-notifications" color={color} size={26} />
         ),
       }}
-    />
+    /> */}
     <Tab.Screen
       name="Explore"
       component={ExploreScreen}

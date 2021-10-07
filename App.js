@@ -113,6 +113,14 @@ const App = () => {
           isLoading: false,
           skipLogin: false,
         };
+      case 'SIGN_IN_SKIPLOGIN':
+        return {
+          ...prevState,
+          userName: null,
+          userToken: null,
+          isLoading: false,
+          skipLogin: false,
+        };
     }
   };
 
@@ -158,6 +166,9 @@ const App = () => {
       _onSkip: async () => {
         console.log('skip login: ', loginState.skipLogin);
         dispatch({type: 'SKIP_LOGIN', skipLogin: true});
+      },
+      _onSkipLogin: () => {
+        dispatch({type: 'SIGN_IN_SKIPLOGIN'});
       },
     }),
     [],
