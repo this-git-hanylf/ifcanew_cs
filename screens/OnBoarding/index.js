@@ -83,9 +83,8 @@ const OnBoardingScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <StatusBar
-        animated
         translucent
-        backgroundColor="#000"
+        backgroundColor="transparent"
         barStyle="dark-content"
       />
 

@@ -9,14 +9,17 @@ import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
 import ExploreScreen from './ExploreScreen';
 import ProfileScreen from './ProfileScreen';
+import SkipScreen from './SkipScreen';
 
 const HomeStack = createStackNavigator();
 const DetailsStack = createStackNavigator();
+const SkipStack = createStackNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
 
 //SCREEN BARU
 import HomeNewScreen from './Home';
+import {ImagePropTypes} from 'react-native';
 
 const MainTabScreen = ({navigation}) => (
   <Tab.Navigator initialRouteName="Home" activeColor="#fff">
@@ -73,7 +76,7 @@ export default MainTabScreen;
 const HomeStackScreen = ({navigation}) => (
   <HomeStack.Navigator
     screenOptions={{
-      headerShown: false, //..hide header
+      headerShown: true, //..hide header
       headerStyle: {
         backgroundColor: '#009387',
       },
@@ -97,6 +100,7 @@ const HomeStackScreen = ({navigation}) => (
         ),
       }}
     />
+    <HomeStack.Screen name="SkipScreen" component={SkipScreen} />
   </HomeStack.Navigator>
 );
 

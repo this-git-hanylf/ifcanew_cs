@@ -24,6 +24,7 @@ import {
 import {DrawerContent} from './screens/DrawerContent';
 
 import MainTabScreen from './screens/MainTabScreen';
+import SkipTabScreen from './screens/NavScreen/SkipTabScreen';
 import SupportScreen from './screens/SupportScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import BookmarkScreen from './screens/BookmarkScreen';
@@ -46,6 +47,7 @@ const App = () => {
     isLoading: true,
     userName: null,
     userToken: null,
+    skipLogin: false,
   };
 
   const CustomDefaultTheme = {
@@ -74,11 +76,18 @@ const App = () => {
 
   const loginReducer = (prevState, action) => {
     switch (action.type) {
+      case 'SKIP_LOGIN':
+        return {
+          ...prevState,
+          skipLogin: true,
+          isLoading: false,
+        };
       case 'RETRIEVE_TOKEN':
         return {
           ...prevState,
           userToken: action.token,
           isLoading: false,
+          skipLogin: false,
         };
       case 'LOGIN':
         return {
@@ -86,6 +95,7 @@ const App = () => {
           userName: action.id,
           userToken: action.token,
           isLoading: false,
+          skipLogin: false,
         };
       case 'LOGOUT':
         return {
@@ -93,6 +103,7 @@ const App = () => {
           userName: null,
           userToken: null,
           isLoading: false,
+          skipLogin: false,
         };
       case 'REGISTER':
         return {
@@ -100,6 +111,7 @@ const App = () => {
           userName: action.id,
           userToken: action.token,
           isLoading: false,
+          skipLogin: false,
         };
     }
   };
@@ -143,6 +155,10 @@ const App = () => {
       toggleTheme: () => {
         setIsDarkTheme(isDarkTheme => !isDarkTheme);
       },
+      _onSkip: async () => {
+        console.log('skip login: ', loginState.skipLogin);
+        dispatch({type: 'SKIP_LOGIN', skipLogin: true});
+      },
     }),
     [],
   );
@@ -173,20 +189,25 @@ const App = () => {
     <PaperProvider theme={theme}>
       <AuthContext.Provider value={authContext}>
         <NavigationContainer theme={theme}>
-          {loginState.userToken !== null ? (
-            <Drawer.Navigator
-              drawerContent={props => <DrawerContent {...props} />}>
-              <Drawer.Screen
-                name="HomeDrawer"
-                component={MainTabScreen}
-                theme={theme}
-              />
-              <Drawer.Screen name="SupportScreen" component={SupportScreen} />
-              <Drawer.Screen name="SettingsScreen" component={SettingsScreen} />
-              <Drawer.Screen name="BookmarkScreen" component={BookmarkScreen} />
-            </Drawer.Navigator>
+          {!loginState.skipLogin ? (
+            loginState.userToken !== null ? (
+              <MainTabScreen />
+            ) : (
+              // <Drawer.Navigator
+              //   drawerContent={props => <DrawerContent {...props} />}>
+              //   <Drawer.Screen
+              //     name="HomeDrawer"
+              //     component={MainTabScreen}
+              //     theme={theme}
+              //   />
+              //   <Drawer.Screen name="SupportScreen" component={SupportScreen} />
+              //   <Drawer.Screen name="SettingsScreen" component={SettingsScreen} />
+              //   <Drawer.Screen name="BookmarkScreen" component={BookmarkScreen} />
+              // </Drawer.Navigator>
+              <RootStackScreen />
+            )
           ) : (
-            <RootStackScreen />
+            <SkipTabScreen />
           )}
         </NavigationContainer>
       </AuthContext.Provider>

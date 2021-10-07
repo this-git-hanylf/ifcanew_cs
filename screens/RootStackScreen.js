@@ -6,6 +6,7 @@ import SplashScreen from './SplashScreen';
 import SignInScreen from './SignInScreen';
 import SignUpScreen from './SignUpScreen';
 import OnBoardingScreen from './OnBoarding';
+
 const RootStack = createStackNavigator();
 
 const RootStackScreen = ({navigation}) => (

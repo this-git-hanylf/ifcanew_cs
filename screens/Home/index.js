@@ -11,7 +11,10 @@ const HomeNewScreen = ({navigation}) => {
   return (
     <View>
       {/* STATUS BAR JANGAN DIUBAH, KARENA TEMPLATE NYA BISA CHANGE DARKMODE */}
-      <StatusBar barStyle={theme.dark ? 'light-content' : 'dark-content'} />
+      <StatusBar
+        barStyle={theme.dark ? 'light-content' : 'dark-content'}
+        backgroundColor={theme.dark ? '#000' : '#fff'}
+      />
       {/* STATUS BAR JANGAN DIUBAH, KARENA TEMPLATE NYA BISA CHANGE DARKMODE */}
 
       {/* ------- CONTENT HOME DARI SINI ----------*/}

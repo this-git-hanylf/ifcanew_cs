@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import {
   View,
   Text,
@@ -14,7 +14,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 
-import {useTheme} from 'react-native-paper';
+import {ActivityIndicator, useTheme} from 'react-native-paper';
 
 import {AuthContext} from '../components/context';
 
@@ -26,6 +26,8 @@ import UserController from '../src/controller/UserController';
 import DeviceInfo from 'react-native-device-info';
 import {productService} from '../src/controller/ProductService';
 import {sessions} from '../src/helpers';
+import MainTabScreen from './MainTabScreen';
+
 const SignInScreen = ({navigation}) => {
   const [data, setData] = React.useState({
     username: '',
@@ -35,13 +37,15 @@ const SignInScreen = ({navigation}) => {
     secureTextEntry: true,
     isValidUser: true,
     isValidPassword: true,
+
     token: '',
     device: '',
   });
+  const [isLoading, setisLoading] = useState(false);
 
   const {colors} = useTheme();
 
-  const {signIn} = React.useContext(AuthContext);
+  const {signIn, _onSkip} = React.useContext(AuthContext);
 
   const textInputChange = val => {
     if (val.trim().length >= 4) {
@@ -123,6 +127,7 @@ const SignInScreen = ({navigation}) => {
   //   };
 
   const buttonLogin = async (userName, password) => {
+    setisLoading(true);
     const mac = await DeviceInfo.getMacAddress().then(mac => {
       return mac;
     });
@@ -146,6 +151,7 @@ const SignInScreen = ({navigation}) => {
           // alert('abis ini get tower', res.Data);
           // signIn(res);
         } else {
+          setisLoading(false);
           navigation.navigate(this.props.componentId, 'SignUpScreen', {
             email: res.Data.user,
           });
@@ -191,8 +197,13 @@ const SignInScreen = ({navigation}) => {
 
       signIn(res);
     } catch (err) {
+      setisLoading(false);
       console.log('error:', err);
     }
+  };
+
+  const tes = () => {
+    _onSkip();
   };
 
   return (
@@ -287,12 +298,32 @@ const SignInScreen = ({navigation}) => {
             </Text>
           </Animatable.View>
         )}
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <TouchableOpacity>
+            <Text style={{color: '#009387', marginTop: 15}}>
+              Forgot password?
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => tes()}
+            // onPress={() => navigation.navigate('SkipScreen')}
+            style={[
+              {
+                marginTop: 15,
+              },
+            ]}>
+            <Text
+              style={[
+                styles.textSkipSignIn,
+                {
+                  color: '#009387',
+                },
+              ]}>
+              Skip Sign In
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-        <TouchableOpacity>
-          <Text style={{color: '#009387', marginTop: 15}}>
-            Forgot password?
-          </Text>
-        </TouchableOpacity>
         <View style={styles.button}>
           <TouchableOpacity
             style={styles.signIn}
@@ -306,18 +337,22 @@ const SignInScreen = ({navigation}) => {
             <LinearGradient
               colors={['#08d4c4', '#01ab9d']}
               style={styles.signIn}>
-              <Text
-                style={[
-                  styles.textSign,
-                  {
-                    color: '#fff',
-                  },
-                ]}>
-                Sign In
-              </Text>
+              {isLoading ? (
+                <ActivityIndicator />
+              ) : (
+                <Text
+                  style={[
+                    styles.textSign,
+                    {
+                      color: '#fff',
+                    },
+                  ]}>
+                  Sign In
+                </Text>
+              )}
             </LinearGradient>
           </TouchableOpacity>
-
+          {/* 
           <TouchableOpacity
             onPress={() => navigation.navigate('SignUpScreen')}
             style={[
@@ -337,7 +372,7 @@ const SignInScreen = ({navigation}) => {
               ]}>
               Sign Up
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </Animatable.View>
     </View>
@@ -411,6 +446,10 @@ const styles = StyleSheet.create({
   },
   textSign: {
     fontSize: 18,
+    fontWeight: 'bold',
+  },
+  textSkipSignIn: {
+    fontSize: 15,
     fontWeight: 'bold',
   },
 });
