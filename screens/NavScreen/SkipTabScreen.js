@@ -11,7 +11,7 @@ import ProfileSkipScreen from '../SkipScreen/ProfileSkip';
 import SkipScreen from '../SkipScreen';
 import SignInScreen from '../SignInScreen';
 
-const HomeStack = createStackNavigator();
+const SkipHomeStack = createStackNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -19,11 +19,19 @@ const Tab = createMaterialBottomTabNavigator();
 // import HomeNewScreen from './Home';
 import {ImagePropTypes} from 'react-native';
 
+import colors from '../../src/themes/Colors';
+import {Colors} from '@ThemeColors';
+
 const SkipTabScreen = ({navigation}) => (
-  <Tab.Navigator initialRouteName="Home" activeColor="#fff">
+  <Tab.Navigator
+    initialRouteName="Home"
+    activeColor="#fff"
+    barStyle={{
+      backgroundColor: colors.hijau_pkbw,
+    }}>
     <Tab.Screen
       name="Home"
-      component={HomeStackScreen}
+      component={SkipHomeStackScreen}
       options={{
         tabBarLabel: 'Home',
         tabBarColor: '#009387',
@@ -49,8 +57,8 @@ const SkipTabScreen = ({navigation}) => (
 
 export default SkipTabScreen;
 
-const HomeStackScreen = ({navigation}) => (
-  <HomeStack.Navigator
+const SkipHomeStackScreen = ({navigation}) => (
+  <SkipHomeStack.Navigator
     screenOptions={{
       headerShown: false, //..hide header
       headerStyle: {
@@ -61,7 +69,7 @@ const HomeStackScreen = ({navigation}) => (
         fontWeight: 'bold',
       },
     }}>
-    <HomeStack.Screen name="Skip" component={SkipScreen} />
-    <HomeStack.Screen name="SignIn" component={SignInScreen} />
-  </HomeStack.Navigator>
+    <SkipHomeStack.Screen name="Skip" component={SkipScreen} />
+    <SkipHomeStack.Screen name="SignIn" component={SignInScreen} />
+  </SkipHomeStack.Navigator>
 );

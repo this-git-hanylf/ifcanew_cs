@@ -13,7 +13,7 @@ import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
-
+import {Colors} from '@ThemeColors';
 import {ActivityIndicator, useTheme} from 'react-native-paper';
 
 import {AuthContext} from '../components/context';
@@ -208,7 +208,7 @@ const SignInScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="#009387" barStyle="light-content" />
+      <StatusBar backgroundColor="#77a05a" barStyle="light-content" />
       <View style={styles.header}>
         <Text style={styles.text_header}>Welcome!</Text>
       </View>
@@ -300,7 +300,7 @@ const SignInScreen = ({navigation}) => {
         )}
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <TouchableOpacity>
-            <Text style={{color: '#009387', marginTop: 15}}>
+            <Text style={{color: Colors.hijau_pkbw, marginTop: 15}}>
               Forgot password?
             </Text>
           </TouchableOpacity>
@@ -316,7 +316,7 @@ const SignInScreen = ({navigation}) => {
               style={[
                 styles.textSkipSignIn,
                 {
-                  color: '#009387',
+                  color: Colors.hijau_pkbw,
                 },
               ]}>
               Skip Sign In
@@ -335,7 +335,7 @@ const SignInScreen = ({navigation}) => {
               //   alert('halo');
             }}>
             <LinearGradient
-              colors={['#08d4c4', '#01ab9d']}
+              colors={[Colors.coklatmuda_pkbw, Colors.coklat_pkbw]}
               style={styles.signIn}>
               {isLoading ? (
                 <ActivityIndicator />
@@ -384,7 +384,7 @@ export default SignInScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#009387',
+    backgroundColor: '#77a05a',
   },
   header: {
     flex: 1,

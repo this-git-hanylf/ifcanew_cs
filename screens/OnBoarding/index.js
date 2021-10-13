@@ -29,14 +29,15 @@ const OnBoardingScreen = ({navigation}) => {
     {
       key: 2,
       title: 'Title 2',
-      text: 'Other cool stuff',
+      text: 'There is no place like the homes by \nThe Pakubuwono Residence',
       image: require('../../src/assets/icons/onboard/apartment.png'),
       backgroundColor: '#febe29',
     },
     {
       key: 3,
       title: 'Rocket guy',
-      text: "I'm already out of descriptions\n\nLorem ipsum bla bla bla",
+      text:
+        'Our properties have set a new standard of comfort and lxury in all of Southeast Asia',
       image: require('../../src/assets/icons/onboard/treasure-map.png'),
       backgroundColor: '#22bcb5',
     },
@@ -44,8 +45,15 @@ const OnBoardingScreen = ({navigation}) => {
 
   const _renderItem = ({item}) => {
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text style={stylesSlide.title}>{item.title}</Text>
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        {/* <Text style={[stylesSlide.title, {fontWeight: 'bold'}]}>
+          {item.title}
+        </Text> */}
         <Image
           source={item.image}
           style={{
@@ -54,7 +62,9 @@ const OnBoardingScreen = ({navigation}) => {
             alignSelf: 'center',
           }}
         />
-        <Text style={stylesSlide.text}>{item.text}</Text>
+        <Text style={[stylesSlide.text, {fontSize: 17, marginHorizontal: 30}]}>
+          {item.text}
+        </Text>
       </View>
     );
   };

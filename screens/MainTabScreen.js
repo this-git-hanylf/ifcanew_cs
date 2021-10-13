@@ -5,6 +5,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
+import colors from '../src/themes/Colors';
+
 import HomeScreen from './HomeScreen';
 import DetailsScreen from './DetailsScreen';
 import ExploreScreen from './ExploreScreen';
@@ -22,7 +24,9 @@ import HomeNewScreen from './Home';
 import {ImagePropTypes} from 'react-native';
 
 const MainTabScreen = ({navigation}) => (
-  <Tab.Navigator initialRouteName="Home" activeColor="#fff">
+  <Tab.Navigator initialRouteName="Home" activeColor="#fff"  barStyle={{
+      backgroundColor: colors.hijau_pkbw,
+    }}>
     <Tab.Screen
       name="Home"
       component={HomeStackScreen}
@@ -76,7 +80,7 @@ export default MainTabScreen;
 const HomeStackScreen = ({navigation}) => (
   <HomeStack.Navigator
     screenOptions={{
-      headerShown: true, //..hide header
+      headerShown: false, //..hide header
       headerStyle: {
         backgroundColor: '#009387',
       },
@@ -84,20 +88,20 @@ const HomeStackScreen = ({navigation}) => (
       headerTitleStyle: {
         fontWeight: 'bold',
       },
+ 
     }}>
     <HomeStack.Screen
       name="Home"
       component={HomeNewScreen}
       options={{
         title: 'Home new',
-        headerLeft: () => (
-          <Icon.Button
-            name="ios-menu"
-            size={25}
-            backgroundColor="#009387"
-            onPress={() => navigation.openDrawer()}
-          />
-        ),
+        // headerLeft: () => (
+        //   <Icon.Button
+        //     name="ios-menu"
+        //     size={25}
+        //     onPress={() => navigation.openDrawer()}
+        //   />
+        // ),
       }}
     />
     <HomeStack.Screen name="SkipScreen" component={SkipScreen} />
