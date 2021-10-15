@@ -12,6 +12,7 @@ import DetailsScreen from './DetailsScreen';
 import ExploreScreen from './ExploreScreen';
 import ProfileScreen from './ProfileScreen';
 import SkipScreen from './SkipScreen';
+import ComingSoonScreen from './ComingSoonScreen';
 
 const HomeStack = createStackNavigator();
 const DetailsStack = createStackNavigator();
@@ -52,7 +53,7 @@ const MainTabScreen = ({navigation}) => (
     /> */}
     <Tab.Screen
       name="Explore"
-      component={ExploreScreen}
+      component={ComingSoonScreen}
       options={{
         tabBarLabel: 'Explore',
         tabBarColor: '#d02860',
